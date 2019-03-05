@@ -24,7 +24,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- Controller나 Service 구현체가 존재하는 패키지를 명시 -->
+	<!-- @Controller나 @Service가 정의된 클래스의 패키지 -->
 	<context:component-scan base-package="com.spring.wolf" />
+	<context:component-scan base-package="com.spring.wolf.controller" />
+	<context:component-scan base-package="com.spring.wolf.controller.bbs" />
+	<context:component-scan base-package="com.spring.wolf.controller.content" />
+	<context:component-scan base-package="com.spring.wolf.controller.member" />
+	<context:component-scan base-package="com.spring.wolf.service.impl" />
 	
 	
 	
