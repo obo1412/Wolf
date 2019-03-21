@@ -113,6 +113,7 @@
 					<if test="subject != null">
 						subject LIKE concat('%', #{subject}, '%')     <!-- 이거 이해 안된다. -->
 					</if>										<!-- 원래 형태는 ('%', #{subject}, '%') 이거 근데 작동 안됨.  -->
+																<!-- 또 다시 정상작동 되네? 왜 되는거냐? -->
 					
 					<if test="content != null">
 						OR content LIKE concat('%', #{content}, '%')

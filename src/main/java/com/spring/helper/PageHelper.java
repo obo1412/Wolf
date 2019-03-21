@@ -21,14 +21,14 @@ public class PageHelper {
 
 
 	
-	/** �럹�씠吏� 援ы쁽�뿉 �븘�슂�븳 怨꾩궛�떇�쓣 泥섎━�븯�뒗 硫붿꽌�뱶 */
+	/** 페이지 구현에 필요한 계산식을 처리하는 메서드 */
 	public void pageProcess(int page, int totalCount, int listCount, int groupCount) {
 		this.page = page;
 		this.totalCount = totalCount;
 		this.listCount = listCount;
 		this.groupCount = groupCount;
 
-		// �쟾泥� �럹�씠吏� �닔
+		// 전체 페이지 수
 	    totalPage = ((totalCount-1)/listCount)+1;
 
 	    // �쁽�옱 �럹�씠吏��뿉 ���븳 �삤李� 議곗젅
