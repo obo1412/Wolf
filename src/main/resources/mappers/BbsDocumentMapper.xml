@@ -95,14 +95,14 @@
 		SELECT id, category, writer_name, subject, hit,  
 			   DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date
 			   
-		<!-- <if test="gallery == true">
+		<if test="gallery == true">
 			,( SELECT concat(file_dir,'/',file_name) FROM bbs_file
 			   WHERE bbs_document_id=bbs_document.id
 					 AND
 					 content_type LIKE ('image/%')
 			   ORDER BY id ASC LIMIT 0, 1
 			) as image_path
-		</if>	 -->   
+		</if> 
 			   
 		FROM   bbs_document
 		
@@ -178,6 +178,13 @@
 			ip_address=#{ipAddress},
 			edit_date+now()
 		WHERE id=#{id}
+	</update>
+	
+	<!-- 특정 회원과의 게시물 참조 해제하기 -->
+	<update id="updateDocumentMemberOut" parameterType="com.spring.wolf.model.BbsDocument">
+		UPDATE bbs_document
+		SET    member_id=NULL, edit_date=now()
+		WHERE  member_id=#{memberId}
 	</update>
 </mapper>
 

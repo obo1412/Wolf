@@ -20,6 +20,8 @@ import com.spring.wolf.controller.Download;
 import com.spring.wolf.model.BbsComment;
 import com.spring.wolf.model.BbsDocument;
 import com.spring.wolf.model.Member;
+import com.spring.wolf.service.BbsCommentService;
+import com.spring.wolf.service.BbsDocumentService;
 /*import com.spring.wolf.service.BbsCommentService;
 import com.spring.wolf.service.BbsDocumentService;*/
 import com.spring.wolf.service.MemberService;
@@ -37,10 +39,10 @@ public class OutOk {
 	UploadHelper upload;
 	@Autowired
 	MemberService memberService;
-	/*@Autowired
+	@Autowired
 	BbsDocumentService bbsDocumentService;
 	@Autowired
-	BbsCommentService bbsCommentService;*/
+	BbsCommentService bbsCommentService;
 
 	@RequestMapping(value = "/member/out_ok.do")
 	public ModelAndView doRun(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -79,8 +81,8 @@ public class OutOk {
 		/** (6) Service를 통한 탈퇴 시도 */
 		try {
 			// 참조관계 해제
-			/*bbsDocumentService.updateDocumentMemberOut(document);
-			bbsCommentService.updateCommentMemberOut(comment);*/
+			bbsDocumentService.updateDocumentMemberOut(document);
+			bbsCommentService.updateCommentMemberOut(comment);
 			// 비밀번호 검사 --> 비밀번호가 잘못된 경우 예외발생
 			memberService.selectMemberPasswordCount(member);
 			// 탈퇴처리
