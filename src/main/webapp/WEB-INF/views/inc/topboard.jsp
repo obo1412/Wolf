@@ -15,7 +15,7 @@
 				<!-- 로고or그림 -->
 				<div class="top-logo">
 					<a href="${pageContext.request.contextPath}/index.do">
-						<img src="http://placehold.it/100x100" />
+						<img src="http://placehold.it/200x100" />
 					</a>
 				</div>
 				<!-- //로고or그림 -->
@@ -30,7 +30,7 @@
 				
 				<!-- 메인글자판 -->
 				<div class="top-text">
-					<a class="navbar-brand" href="${pageContext.request.contextPath}/index.do">우리동네프로선수들</a>
+					<a href="${pageContext.request.contextPath}/index.do">우리동네프로선수들</a>
 				</div>
 				<!-- //메인글자판 -->
 					
@@ -39,21 +39,21 @@
 						<img src="${pageContext.request.contextPath}/assets/img/icon-ps-info.png" alt="ic2" />
 					</a>
 				</div>
+				
+				<!-- 로그인 등 -->
+				<div class="log-info">
+					<ul>
+						<li>
+							<a href="#">로그인</a>
+						</li>
+						<li class="log-info-child">
+							<a href="#">회원가입</a>
+						</li>
+					</ul>
+				</div>
+				<!-- //로그인 등 -->
+				
 			</div>
-			
-			
-			<!-- 로그인 등 -->
-			<div class="log-info">
-				<ul>
-					<li>
-						<a href="#">로그인</a>
-					</li>
-					<li>
-						<a href="#">회원가입</a>
-					</li>
-				</ul>
-			</div>
-			<!-- //로그인 등 -->
 		</div>
 		
 	
