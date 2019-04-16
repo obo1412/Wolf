@@ -84,7 +84,7 @@
 	
 </head>
 <body>
-	<%@include file="/WEB-INF/views/inc/topboard.jsp" %>
+	<%@include file="/WEB-INF/views/inc/topbar.jsp" %>
 	
 	<div class="container">
 		<h1 class="m1">Hello! You are the Professional player our hometown!</h1>

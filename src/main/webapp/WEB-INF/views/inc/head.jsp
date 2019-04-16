@@ -11,7 +11,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	
 <!-- 공통 CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/topboard.css" />
 
 <!-- 다음 우편번호 검색 스크립트 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

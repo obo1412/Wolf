@@ -61,7 +61,7 @@
 	<!--helper 패키지 객체 주입 -->
 	<bean id="web" class="com.spring.helper.WebHelper" scope="singleton" />
 	<bean id="upload" class="com.spring.helper.UploadHelper" scope="singleton">
-		<constructor-arg value="D:\Software_Educations\JAVA\workspaceSpring\mysite-spring" />
+		<constructor-arg value="C:\Users\OK-home\obo1412\work\workspace_wolf\wolf" />
 	</bean>
 	<bean id="mail" class="com.spring.helper.MailHelper" scope="singleton">
 		<constructor-arg ref="mailSender" />
