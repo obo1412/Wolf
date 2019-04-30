@@ -67,24 +67,10 @@
 			background-position: center center;
 		}
 	</style>
-	
-	<script type="text/javascript">
-		$(function() {
-			$(".carousel-inner").swipe({
-			    swipeLeft: function() {
-			        $(this).parent().carousel('next');
-			    },
-			    swipeRight: function() {
-			        $(this).parent().carousel('prev');
-			    },
-			    threshold:0
-			});
-		});
-	</script>
-	
 </head>
 <body>
 	<%@include file="/WEB-INF/views/inc/topboard.jsp" %>
+	<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
 	
 	<div class="container">
 		<h1 class="m1">Hello! You are the Professional player our hometown!</h1>
@@ -196,5 +182,23 @@
 	
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>
+	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
+
+	<script type="text/javascript">
+	
+		$(function() {
+			$(".carousel-inner").swipe({
+			    swipeLeft: function() {
+			        $(this).parent().carousel('next');
+			    },
+			    swipeRight: function() {
+			        $(this).parent().carousel('prev');
+			    },
+			    threshold:0
+			});
+		});
+		
+
+	</script>
 </body>
 </html>
