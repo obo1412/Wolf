@@ -11,14 +11,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 	<title>Our Hometown Professional</title>
 	<%@ include file="/WEB-INF/views/inc/head.jsp" %>
-	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/index.css" />
 	<style type="text/css">
-		.m1 {
-			padding-top: 100px;
-		}
 		
 		/** 메인페이지 > 최근게시물 > 제목 영역 */
 		.article-item .page-header {
+			margin-top: 20px;
 			margin-bottom: 0px;
 			border-bottom: 0px;
 		}
@@ -31,7 +29,7 @@
 		
 		/** 메인페이지 > 최근게시물 > 제목 우측의 more 버튼 */
 		.article-item .btn {
-			margin-bottom: -15px;
+			
 		}
 		
 		/** 메인페이지 > 최근게시물 > 글 목록 > 링크 */
@@ -41,31 +39,7 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-		}
-		
-		/** 케러셀 영역의 전체 높이 지정 */
-		#carousel {
-			height: 80%;
-		}
-		
-		/** 핸드폰 사이즈에서는 케러셀이 화면을 가득 채움 */
-		@media (max-width: 767px) {
-			#carousel {
-				height: 100%;
-			}
-		}
-		
-		/** 케러셀의 각 영역 높이가 케러셀 안에서 가득 차도록 구성 */
-		#carousel .item, #carousel .carousel-inner {
-			height: 100%;
-		}
-		
-		/** 케러셀 이미지 */
-		#carousel .img {
-			height: 100%;
-			background-size: cover;
-			background-position: center center;
-		}
+		}	
 	</style>
 </head>
 <body>
@@ -73,59 +47,19 @@
 	<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
 	
 	<div class="container">
-		<h1 class="m1">Hello! You are the Professional player our hometown!</h1>
-	</div>
-	
-	<!-- 케러셀 -->
-	<div id="carousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<c:forEach var="document" items="${galleryList}" varStatus="status">
-				<c:set var="cls" value="" />
-				<c:if test="${status.index == 0}">
-					<c:set var="cls" value="active" />
-				</c:if>
-				<li data-target="#carousel" data-slide-to="${status.index}" class="${cls}"></li>
-			</c:forEach>
-		</ol>
-	
-		<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox">
-			<c:forEach var="document" items="${galleryList}"  varStatus="status">
-				<c:set var="cls" value="" />
-				<c:if test="${status.index == 0}">
-					<c:set var="cls" value="active" />
-				</c:if>
-				
-				<c:url var="image_url" value="/download.do">
-					<c:param name="file" value="${document.imagePath}" />
-				</c:url>
-				
-				<div class="item ${cls}">
-					<div class="img" style="background-image:url('${image_url}')"></div>
-					<div class="carousel-caption">
-						<h2>${document.subject}</h2>
-						<p><a href="${pageContext.request.contextPath}/bbs/document_read.do?category=gallery&document_id=${document.id}" 
-						class="btn btn-primary btn-lg">view</a></p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	
-		<!-- Controls -->
-		<a class="left carousel-control" href="#carousel" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left"></span>
-		</a>
-		<a class="right carousel-control" href="#carousel" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right"></span>
-		</a>
-	</div>
-	
-	<!-- 최신 게시물 목록 영역 -->
-	<div class="container">
-		<div class="row">
+		<div class="content-box">
+			<div class="content event-bar">
+				농구공 축구공 아이콘으로 종목을 선택 가능하게 하는 곳
+			</div>
+			<div class="content search-game">
+				게시판1
+			</div>
+			<div class="content hot-game">
+				게시판2
+			</div>
+			
 			<!-- 공지사항 -->
-			<div class="col-md-4 article-item">
+			<div class="content article-item notice-board">
 				<div class="page-header clearfix">
 					<h4 class="pull-left">공지사항</h4>
 					<div class="pull-right">
@@ -141,9 +75,10 @@
 					</c:forEach>
 				</ul>
 			</div>
+			<!-- 공지사항 끝 -->
 			
 			<!-- 자유게시판 -->
-			<div class="col-md-4 article-item">
+			<div class="content article-item free-board">
 				<div class="page-header clearfix">
 					<h4 class="pull-left">자유게시판</h4>
 					<div class="pull-right">
@@ -159,9 +94,10 @@
 					</c:forEach>
 				</ul>
 			</div>
+			<!-- 자유게시판 끝 -->
 			
 			<!-- 질문답변 -->
-			<div class="col-md-4 article-item">
+			<div class="content article-item">
 				<div class="page-header clearfix">
 					<h4 class="pull-left">질문답변</h4>
 					<div class="pull-right">
@@ -177,6 +113,8 @@
 					</c:forEach>
 				</ul>
 			</div>
+			<!-- 질문답변 끝 -->
+			
 		</div>
 	</div>
 	
@@ -185,19 +123,6 @@
 	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
 
 	<script type="text/javascript">
-	
-		$(function() {
-			$(".carousel-inner").swipe({
-			    swipeLeft: function() {
-			        $(this).parent().carousel('next');
-			    },
-			    swipeRight: function() {
-			        $(this).parent().carousel('prev');
-			    },
-			    threshold:0
-			});
-		});
-		
 
 	</script>
 </body>
