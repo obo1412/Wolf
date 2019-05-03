@@ -13,7 +13,7 @@
 		// 위 주석 코드는 테스트용도로 jqtest 클래스 div 박스에 사이즈
 		// 제대로 주입하는지 확인한 것.
 		var contentWidth = containerWidth - sidebarWidth;
-		$(".content").width(contentWidth);
+		$(".content").outerWidth(contentWidth);
 	}
 	/* 컨텐츠 width 길이 자동 계산 끝 */
 	

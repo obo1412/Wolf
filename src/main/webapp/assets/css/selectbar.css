@@ -1,0 +1,37 @@
+.select-bar {
+	float: left;
+	width: 100%;
+	height: 50px;
+	border-bottom: double 5px black;
+}
+
+.icon-arrow-left {
+	float: left;
+}
+
+.icon-arrow-right {
+	float: right;
+}
+
+.select-bar span {
+	display: inline-block;
+	margin: auto;
+	height: 100%;
+}
+
+.select-bar span img:hover {
+	background-color: gray;
+}
+
+.select-bar img {
+	display: block;
+	height: 100%;
+	width: auto;
+}
+
+@media (max-width: 768px) {
+	.select-bar {
+		width: 100%;
+		border-bottom: 1px solid black;
+	}
+}

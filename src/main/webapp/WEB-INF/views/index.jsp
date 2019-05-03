@@ -48,9 +48,7 @@
 	
 	<div class="container">
 		<div class="content-box">
-			<div class="content event-bar">
-				농구공 축구공 아이콘으로 종목을 선택 가능하게 하는 곳
-			</div>
+			<%@include file="/WEB-INF/views/inc/selectbar.jsp" %>
 			<div class="content search-game">
 				게시판1
 			</div>
