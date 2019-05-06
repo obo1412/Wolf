@@ -50,10 +50,29 @@
 		<div class="content-box">
 			<%@include file="/WEB-INF/views/inc/selectbar.jsp" %>
 			<div class="content search-game">
-				게시판1
+				<!-- 검색 폼 -->
+			    <div class="pull-left">
+					<form method="get" action="${pageContext.request.contextPath}/bbs/document_list.do" style="width: 200px">
+						<input type="hidden" name="category" value="${category}" />
+						<div class="input-group">
+							<input type="text" name="keyword" class="form-control" 
+								placeholder="제목,내용 검색"  value="${keyword}"/>
+							<span class="input-group-btn">
+								<button class="btn btn-success" type="submit">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="content hot-game">
-				게시판2
+				<div class="icon icon-arrow-game-left icon-arrow-left imgVerticalMiddle">
+					<img src="${pageContext.request.contextPath}/assets/img/icon-arrow-game-left.png">
+				</div>
+				<div class="icon icon-arrow-game-right icon-arrow-right imgVerticalMiddle">
+					<img src="${pageContext.request.contextPath}/assets/img/icon-arrow-game-right.png">
+				</div>
 			</div>
 			
 			<!-- 공지사항 -->

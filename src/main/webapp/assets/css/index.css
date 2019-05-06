@@ -1,6 +1,5 @@
 .container {
-	max-width: 900px;
-	min-width: 360px;
+	width: 100%;
 	padding: 0px;
 }
 
@@ -10,19 +9,23 @@
 	padding: 0 10px;
 }
 
-.event-bar {
-	float: left;
-	width: 100%;
-	height: 50px;
-	border-bottom: double 5px black;
-}
-
 .search-game {
 	height: 100px;
 }
 
 .hot-game {
 	height: 150px;
+}
+
+.icon-arrow-game-left img {
+	
+	width: 60px;
+	height: 100%;
+}
+
+.icon-arrow-game-right img {
+	width: 60px;
+	height: 100%;
 }
 
 
@@ -50,11 +53,6 @@
 	
 	.content:last-child {
 		border-bottom: 0;
-	}
-
-	.event-bar {
-		width: 100%;
-		border-bottom: 1px solid black;
 	}
 
 	.search-game {
