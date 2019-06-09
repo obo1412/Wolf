@@ -78,63 +78,12 @@
 					</div>
 				</div>
 			</div>
+	
+	
+			<div id="map" style="width:500px;height:400px; float:left; border:1px solid black;">
 			
-			<!-- 공지사항 -->
-			<div class="content article-item notice-board">
-				<div class="page-header clearfix">
-					<h4 class="pull-left">공지사항</h4>
-					<div class="pull-right">
-						<a href="${pageContext.request.contextPath}/bbs/document_list.do?category=notice" class="btn btn-warning btn-xs">more</a>
-					</div>
-				</div>
-				
-				<ul class="list-group">
-					<c:forEach var="document" items="${noticeList}">
-						<li class="list-group-item">
-							<a href="${pageContext.request.contextPath}/bbs/document_read.do?category=${document.category}&document_id=${document.id}">${document.subject}</a>
-						</li>
-					</c:forEach>
-				</ul>
 			</div>
-			<!-- 공지사항 끝 -->
-			
-			<!-- 자유게시판 -->
-			<div class="content article-item free-board">
-				<div class="page-header clearfix">
-					<h4 class="pull-left">자유게시판</h4>
-					<div class="pull-right">
-						<a href="${pageContext.request.contextPath}/bbs/document_list.do?category=free" class="btn btn-warning btn-xs">more</a>
-					</div>
-				</div>
-				
-				<ul class="list-group">
-					<c:forEach var="document" items="${freeList}">
-						<li class="list-group-item">
-							<a href="${pageContext.request.contextPath}/bbs/document_read.do?category=${document.category}&document_id=${document.id}">${document.subject}</a>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-			<!-- 자유게시판 끝 -->
-			
-			<!-- 질문답변 -->
-			<div class="content article-item">
-				<div class="page-header clearfix">
-					<h4 class="pull-left">질문답변</h4>
-					<div class="pull-right">
-						<a href="${pageContext.request.contextPath}/bbs/document_list.do?category=qna" class="btn btn-warning btn-xs">more</a>
-					</div>
-				</div>
-				
-				<ul class="list-group">
-					<c:forEach var="document" items="${qnaList}">
-						<li class="list-group-item">
-							<a href="${pageContext.request.contextPath}/bbs/document_read.do?category=${document.category}&document_id=${document.id}">${document.subject}</a>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-			<!-- 질문답변 끝 -->
+			<input type="text" id="search-keyword" value="체육관" style="width:500px; height:50px; float:left; border: 1px solid black;">
 			
 		</div>
 	</div>
@@ -143,8 +92,64 @@
 	<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>
 	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
 
-	<script type="text/javascript">
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6a3dd312ac8afc0012c58d3a915c29b&libraries=services,clusterer,drawing"></script>
+	<script>
+		var infowindow = new daum.maps.InfoWindow({zIndex:1});
+		
+		var mapContainer = document.getElementById('map');
+		var mapOptions = {
+			center: new daum.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+	
+		var map = new daum.maps.Map(mapContainer, mapOptions);
+		
+		var searchKeyword = document.getElementById('search-keyword');
+		
+		/* setMap 라이브러리 기능확인중 */
+		var places = new daum.maps.services.Places();
+		var callback = function(result, status) {
+		    if (status === daum.maps.services.Status.OK) {
+		        console.log(result);
+		    }
+		};
 
+		places.keywordSearch(searchKeyword, placesSearchCB);
+		
+		function placesSearchCB (data, status, pagination) {
+		    if (status === daum.maps.services.Status.OK) {
+
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+		        // LatLngBounds 객체에 좌표를 추가합니다
+		        var bounds = new daum.maps.LatLngBounds();
+
+		        for (var i=0; i<data.length; i++) {
+		            displayMarker(data[i]);    
+		            bounds.extend(new daum.maps.LatLng(data[i].y, data[i].x));
+		        }       
+
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		        map.setBounds(bounds);
+		    } 
+		}
+		
+		// 지도에 마커를 표시하는 함수입니다
+		function displayMarker(place) {
+		    
+		    // 마커를 생성하고 지도에 표시합니다
+		    var marker = new daum.maps.Marker({
+		        map: map,
+		        position: new daum.maps.LatLng(place.y, place.x) 
+		    });
+
+		    // 마커에 클릭이벤트를 등록합니다
+		    daum.maps.event.addListener(marker, 'click', function() {
+		        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+		        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+		        infowindow.open(map, marker);
+		    });
+		}
+		/* setMap 라이브러리 기능확인중 끝 */
 	</script>
 </body>
 </html>

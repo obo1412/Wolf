@@ -4,59 +4,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
-	
+
 </head>
-<!-- 메뉴바 -->
-		<!-- 로고 영역 -->
-		<div class="top-first-line">
+	<!-- 로고 영역 -->
+	<div class="top-first-line clear">		
+		<!-- 로고or그림 -->
+		<div class="top-logo">
+			<a href="${pageContext.request.contextPath}/index.do">
+				<img src="http://placehold.it/200x100" />
+			</a>
+		</div>
+		<!-- //로고or그림 -->
+	
+		<!--  반응형 메뉴 버튼 -->
+		<div class="mb-nav-btn">
+			<a href="#">
+				<img src="${pageContext.request.contextPath}/assets/img/icon-mb-menu.png" alt="ic1" />
+			</a>
+		</div>
+		<!-- // 반응형 메뉴 버튼 종료 -->
+		
+		<!-- 메인글자판 -->
+		<div class="top-text">
+			<a href="${pageContext.request.contextPath}/index.do">우리동네프로선수들</a>
+		</div>
+		<!-- //메인글자판 -->
 			
-			<div class="mb-top">
-			
-				<!-- 로고or그림 -->
-				<div class="top-logo">
-					<a href="${pageContext.request.contextPath}/index.do">
-						<img src="http://placehold.it/200x100" />
-					</a>
-				</div>
-				<!-- //로고or그림 -->
-			
-				<!--  반응형 메뉴 버튼 -->
-				<div class="mb-nav-btn">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/assets/img/icon-mb-menu.png" alt="ic1" />
-					</a>
-				</div>
-				<!-- // 반응형 메뉴 버튼 종료 -->
-				
-				<!-- 메인글자판 -->
-				<div class="top-text">
-					<a href="${pageContext.request.contextPath}/index.do">우리동네프로선수들</a>
-				</div>
-				<!-- //메인글자판 -->
-					
-				<div class="log-info-mb-btn">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/assets/img/icon-ps-info.png" alt="ic2" />
-					</a>
-				</div>
-				
-				<!-- 로그인 등 -->
-				<div class="log-info">
-					<ul>
-						<li>
-							<a href="#">로그인</a>
-						</li>
-						<li class="log-info-child">
-							<a href="#">회원가입</a>
-						</li>
-					</ul>
-				</div>
-				<!-- //로그인 등 -->
-				
-			</div>
+		<div class="log-info-mb-btn">
+			<a href="#">
+				<img src="${pageContext.request.contextPath}/assets/img/icon-ps-info.png" alt="ic2" />
+			</a>
 		</div>
 		
-	
+		<!-- 로그인 등 -->
+		<div class="log-info">
+			<ul>
+				<li>
+					<a href="#">로그인</a>
+				</li>
+				<li class="log-info-child">
+					<a href="#">회원가입</a>
+				</li>
+			</ul>
+		</div>
+		<!-- //로그인 등 -->
+	</div>
+		
 	
 	<%-- 
 	

@@ -1,5 +1,4 @@
 .sidebar {
-	display: block;
 	float: left;
 	width: 150px;
 	min-height: 500px;
@@ -11,12 +10,11 @@
 @media (max-width: 768px) {
 	.sidebar {
 		display: none;
-		display: none;
 		/* 포지션 절대로 지정해놓으면 화면의 절대좌표지정이됨
 			따라서 메뉴를 없애놓고, 버튼을 눌러
 			화면에 띄우게 될때, 지정해둔 위치에 걍 뜨게됨 */
 		position: absolute;
-		min-width: 150px;
+		width: 150px;
 		z-index: 1000;
 		/* 포지션 절대로 지정해놓으면 화면의 절대좌표지정이됨 */
 		height: 100%;

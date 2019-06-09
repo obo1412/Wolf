@@ -1,5 +1,7 @@
 package com.spring.wolf.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -197,6 +199,37 @@ public class MemberServiceImpl implements MemberService {
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("회원정보 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Member> selectMemberList(Member member) throws Exception {
+		List<Member> result = null;
+		
+		try {
+			result = sqlSession.selectList("MemberMapper.selectPlayerList", member);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int getPlayerCount(Member member) throws Exception {
+		int result = 0;		
+		
+		try {
+			result = sqlSession.selectOne("MemberMapper.selectPlayerCount", member);
+		} catch (Exception e) {
+			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		
 		return result;

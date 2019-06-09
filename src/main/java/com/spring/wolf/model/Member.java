@@ -16,6 +16,33 @@ public class Member {
 	private String regDate;
 	private String editDate;
 	private String newUserPw;
+	private int PrivateOptionKey;
+	private int limitStart;
+	private int listCount;
+
+	public int getLimitStart() {
+		return limitStart;
+	}
+
+	public void setLimitStart(int limitStart) {
+		this.limitStart = limitStart;
+	}
+
+	public int getListCount() {
+		return listCount;
+	}
+
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+
+	public int getPrivateOptionKey() {
+		return PrivateOptionKey;
+	}
+
+	public void setPrivateOptionKey(int privateOptionKey) {
+		this.PrivateOptionKey = privateOptionKey;
+	}
 
 	public int getId() {
 		return id;
@@ -142,7 +169,8 @@ public class Member {
 		return "Member [id=" + id + ", name=" + name + ", userId=" + userId + ", userPw=" + userPw + ", email=" + email
 				+ ", gender=" + gender + ", birthdate=" + birthdate + ", tel=" + tel + ", postcode=" + postcode
 				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", profileImg=" + profileImg + ", regDate=" + regDate
-				+ ", editDate=" + editDate + ", newUserPw=" + newUserPw + "]";
+				+ ", editDate=" + editDate + ", newUserPw=" + newUserPw + ", PrivateOptionKey=" + PrivateOptionKey
+				+ "]";
 	}
 
 }

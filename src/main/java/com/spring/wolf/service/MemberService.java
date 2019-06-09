@@ -1,5 +1,7 @@
 package com.spring.wolf.service;
 
+import java.util.List;
+
 import com.spring.wolf.model.Member;
 
 /** 회원 관련 기능을 제공하기 위한 Service 계층 */
@@ -67,4 +69,15 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public Member selectMember(Member member) throws Exception;
+	
+	/**
+	 * 선수들 목록 조회
+	 * @param member
+	 * @return 선수(회원)목록
+	 * @throws Exception
+	 */
+	public List<Member> selectMemberList(Member member) throws Exception;
+	
+	
+	public int getPlayerCount(Member member) throws Exception;
 }

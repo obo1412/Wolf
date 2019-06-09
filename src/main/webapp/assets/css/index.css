@@ -1,6 +1,8 @@
-.container {
+.con {
 	width: 100%;
+	max-width: 900px;
 	padding: 0px;
+	margin: 0px;
 }
 
 .content {
@@ -31,10 +33,10 @@
 
 
 @media (max-width: 768px) {
-	.container {
+	.con {
 		min-width: 360px;
 		width: 100%;
-		float: left;
+
 	}
 
 	.content-box {

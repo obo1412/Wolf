@@ -6,10 +6,34 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/document_list.css" />
+	<style type="text/css">
+		.container {
+			max-width: 900px;
+		}
+		
+		.page-header {
+			margin: 0px;
+		}
+		
+		@media (max-width: 768px) {
+			.container {
+				display: inline-block;
+				margin: 0px;
+			}
+			
+			.page-header {
+				display: inline-block;
+				margin-top: 10px;
+			}
+		}
+	</style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/inc/topbar.jsp" %>
-<div class="container">
+<%@ include file="/WEB-INF/views/inc/topboard.jsp" %>
+<%@ include file="/WEB-INF/views/inc/sidebar.jsp" %>
+
+<div class="con">
 	<h1 class="page-header">${bbsName} - <small>글 목록</small></h1>
 		
 	<!-- 글 목록 시작 -->
@@ -58,9 +82,11 @@
 
 	<!-- 목록 페이지 하단부의 쓰기버튼+검색폼+페이지 번호 공통 영역 include -->
 	<%@ include file="/WEB-INF/views/inc/bbs_list_bottom.jsp" %>
+	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
 		
 </div>
 <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
+<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>
 </body>
 </html>
 
