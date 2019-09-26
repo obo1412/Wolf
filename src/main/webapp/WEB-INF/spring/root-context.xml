@@ -39,7 +39,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    <property name="url" 
-	     value="jdbc:mysql://localhost:3306/wolf?characterEncoding=UTF8"/>
+	     value="jdbc:mysql://localhost:3306/wolf_rev2?characterEncoding=UTF8"/>
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -69,6 +69,7 @@
 	<bean id="page" class="com.spring.helper.PageHelper" scope="singleton" />
 	<bean id="regex" class="com.spring.helper.RegexHelper" scope="singleton" />
 	<bean id="util" class="com.spring.helper.Util" scope="singleton" />
+	<bean id="file" class="com.spring.helper.FileHelper" scope="singleton" />
 	
 	<!-- 싱글톤 객체의 생성 -->
 	<bean id="bbsCommon" class="com.spring.wolf.controller.bbs.BBSCommon"

@@ -49,41 +49,28 @@
 	<div class="con clear">
 		<div class="content-box">
 			<%@include file="/WEB-INF/views/inc/selectbar.jsp" %>
-			<div class="content search-game">
-				<!-- 검색 폼 -->
-			    <div class="pull-left">
-					<form method="get" action="${pageContext.request.contextPath}/bbs/document_list.do" style="width: 200px">
-						<input type="hidden" name="category" value="${category}" />
-						<div class="input-group">
-							<input type="text" name="keyword" class="form-control" 
-								placeholder="제목,내용 검색"  value="${keyword}"/>
-							<span class="input-group-btn">
-								<button class="btn btn-success" type="submit">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</span>
-						</div>
-					</form>
+				
+			<div class="content" style="height:400px; float:left;">
+				<div id="map" style="float: left; margin: auto; width:450px; height: 350px; float:left; border:1px solid black;">
+				
 				</div>
 			</div>
-			<div class="content hot-game">
-				<div class="icon icon-arrow-game-left icon-arrow-left PreSetVM">
-					<div class="SetVerticalMid">
-						<img src="${pageContext.request.contextPath}/assets/img/icon-arrow-game-left.png">
-					</div>
-				</div>
-				<div class="icon icon-arrow-game-right icon-arrow-right PreSetVM">
-					<div class="SetVerticalMid">
-						<img src="${pageContext.request.contextPath}/assets/img/icon-arrow-game-right.png">
-					</div>
-				</div>
-			</div>
-	
-	
-			<div id="map" style="width:500px;height:400px; float:left; border:1px solid black;">
 			
+			<div>
+				<select name="city" id="area1">
+					<option value="">시/도 선택</option>
+					<c:forEach var="aitem" items="${alist}" varStatus="i">
+						<option value="${aitem.id}">${aitem.name}</option>
+					</c:forEach>
+				</select>
+				<select name="town">
+					<option value="">시/군/구 선택</option>
+					<c:forEach var="a2item" items="${a2list}" varStatus="i">
+						<option value="${a2item.id}">${a2item.name}</option>
+					</c:forEach>
+				</select>
+				<input type="button" value="지역게시판 입장" onclick="location.href='${pageContext.request.contextPath}/bbs/document_list.do?category=1001000'">
 			</div>
-			<input type="text" id="search-keyword" value="체육관" style="width:500px; height:50px; float:left; border: 1px solid black;">
 			
 		</div>
 	</div>
@@ -94,28 +81,24 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6a3dd312ac8afc0012c58d3a915c29b&libraries=services,clusterer,drawing"></script>
 	<script>
-		var infowindow = new daum.maps.InfoWindow({zIndex:1});
-		
-		var mapContainer = document.getElementById('map');
-		var mapOptions = {
-			center: new daum.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
 	
-		var map = new daum.maps.Map(mapContainer, mapOptions);
+		var infowindow = new daum.maps.InfoWindow({zIndex:1});
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new daum.maps.LatLng(37.566826, 126.9786567), "C:/Users/OK-home"// 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+	
+		// 지도를 생성합니다    
+		var map = new daum.maps.Map(mapContainer, mapOption);
 		
-		var searchKeyword = document.getElementById('search-keyword');
-		
-		/* setMap 라이브러리 기능확인중 */
-		var places = new daum.maps.services.Places();
-		var callback = function(result, status) {
-		    if (status === daum.maps.services.Status.OK) {
-		        console.log(result);
-		    }
-		};
+		// 장소 검색 객체를 생성합니다
+		var ps = new daum.maps.services.Places(); 
 
-		places.keywordSearch(searchKeyword, placesSearchCB);
-		
+		// 키워드로 장소를 검색합니다
+		ps.keywordSearch('성동구', placesSearchCB); 
+
+		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 		function placesSearchCB (data, status, pagination) {
 		    if (status === daum.maps.services.Status.OK) {
 
@@ -132,7 +115,7 @@
 		        map.setBounds(bounds);
 		    } 
 		}
-		
+
 		// 지도에 마커를 표시하는 함수입니다
 		function displayMarker(place) {
 		    
@@ -149,7 +132,24 @@
 		        infowindow.open(map, marker);
 		    });
 		}
-		/* setMap 라이브러리 기능확인중 끝 */
+		
+		$(function() {
+			$("#area1").change(function(e) {
+				e.preventDefault();
+				var selectedArea1 = $("#area1").val();
+				$.ajax({
+					url: '${pageContext.request.contextPath}/map/map_search.do',
+					method: 'post',
+					data: {selectedArea1:selectedArea1},
+					dataType : 'html',
+					success: function(req) {
+						
+					}
+				});
+				
+			});
+		});
+		
 	</script>
 </body>
 </html>

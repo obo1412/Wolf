@@ -14,7 +14,7 @@ public class BBSCommon {
 	public String getBbsName(String category) throws Exception {
 		// 리턴할 게시판 이름
 		String bbsName = null;
-
+		
 		// 카테고리값이 존재할 경우 게시판이름 판별
 		if (category != null) {
 			if (category.equals("notice")) {
@@ -25,7 +25,12 @@ public class BBSCommon {
 				bbsName = "갤러리";
 			} else if (category.equals("qna")) {
 				bbsName = "질문/답변";
+			} else if (category.equals("11101000")) {
+				bbsName = "성동구 게시판";
+			} else if (category.equals("12103000")) {
+				bbsName = "계양구 게시판";
 			}
+			
 		}
 
 		// 생성된 게시판 이름이 없다면 예외를 발생시킨다.

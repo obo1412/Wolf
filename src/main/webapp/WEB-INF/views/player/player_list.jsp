@@ -16,7 +16,10 @@
 </head>
 
 <body>
-	<div class="container">
+	<%@include file="/WEB-INF/views/inc/topboard.jsp" %>
+	<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
+	
+	<div class="con clear">
 		<div class="page-header clearfix">
 			<h1 class='pull-left'>선수목록</h1>
 			<!-- 검색폼 + 추가버튼 -->
@@ -140,6 +143,10 @@
 			</ul>
 		</nav>
 	</div>
+	
+	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
+	<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>
+	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
 </body>
 </html>
 

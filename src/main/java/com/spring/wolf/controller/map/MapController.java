@@ -15,8 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.helper.PageHelper;
 import com.spring.helper.WebHelper;
-
+import com.spring.wolf.model.Area;
+import com.spring.wolf.model.Area2;
 import com.spring.wolf.model.Member;
+import com.spring.wolf.service.Area2Service;
+import com.spring.wolf.service.AreaService;
 import com.spring.wolf.service.MemberService;
 
 @Controller
@@ -33,6 +36,12 @@ public class MapController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	AreaService areaService;
+	
+	@Autowired
+	Area2Service area2Service;
+	
 	/** 교수 목록 페이지 */
 	@RequestMapping(value = "/map/map_search.do", method = RequestMethod.GET)
 	public ModelAndView doRun(Locale locale, Model model) {
@@ -42,6 +51,8 @@ public class MapController {
 		
 		// 파라미터를 저장할 Beans
 		Member member = new Member();
+		Area area = new Area();
+		
 		
 		// 검색어 파라미터 받기 + Beans 설정
 		String keyword = web.getString("keyword", "");
@@ -73,11 +84,34 @@ public class MapController {
 			return web.redirect(null, e.getLocalizedMessage());
 		}
 		
+		List<Area> alist = null;
+		try {
+			alist = areaService.selectAreaList(area);
+		} catch (Exception e) {
+			return web.redirect(null, e.getLocalizedMessage());
+		}
+		
+		/**
+		 * ajax로 area2에 area1Id를 받아와 셋을 해야한다.
+		 */
+		Area2 area2 = new Area2();
+		int selectedArea1 = web.getInt("selectedArea1");
+		area2.setArea1Id(selectedArea1);
+		
+		List<Area2> a2list = null;
+		try {
+			a2list = area2Service.selectArea2List(area2);
+		} catch (Exception e) {
+			return web.redirect(null, e.getLocalizedMessage());
+		}
+		
 		/** 4) View 처리하기 */
 		// 조회 결과를 View에게 전달한다.
 		model.addAttribute("list", list);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("page", page);
+		model.addAttribute("alist", alist);
+		model.addAttribute("a2list", a2list);
 		
 		return new ModelAndView("map/map_search");
 	}	
