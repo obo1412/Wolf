@@ -1,16 +1,9 @@
-package com.spring.wolf.controller.map;
+package com.spring.wolf.controller.bbs;
 
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.util.URLEncoder;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +23,7 @@ import com.spring.wolf.service.AreaService;
 import com.spring.wolf.service.MemberService;
 
 @Controller
-public class MapController {
+public class DocumentSearch {
 	/** log4j 객체 생성 및 사용할 객체 주입받기 */
 	//private static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
 	// --> import study.spring.helper.WebHelper;
@@ -50,9 +43,8 @@ public class MapController {
 	Area2Service area2Service;
 	
 	/** 교수 목록 페이지 */
-	@RequestMapping(value = "/map/map_search.do", method = RequestMethod.GET)
-	public ModelAndView doRun(Locale locale, Model model,
-			HttpServletRequest req, HttpServletResponse response) {
+	@RequestMapping(value = "/bbs/document_search.do", method = RequestMethod.GET)
+	public ModelAndView doRun(Locale locale, Model model) {
 		
 		/** 1) WebHelper 초기화 및 파라미터 처리 */
 		web.init();
@@ -63,8 +55,8 @@ public class MapController {
 		
 		
 		// 검색어 파라미터 받기 + Beans 설정
-		String keyword2 = web.getString("keyword", "");
-		member.setName(keyword2);
+		String keyword = web.getString("keyword", "");
+		member.setName(keyword);
 		
 		// 현재 페이지 번호에 대한 파라미터 받기
 		int nowPage = web.getInt("page", 1);
@@ -116,41 +108,10 @@ public class MapController {
 		/** 4) View 처리하기 */
 		// 조회 결과를 View에게 전달한다.
 		model.addAttribute("list", list);
-		model.addAttribute("keyword2", keyword2);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("page", page);
 		model.addAttribute("alist", alist);
 		model.addAttribute("a2list", a2list);
-		
-		
-		
-		// 검색어api 내용 시작
-		// 요청변수 설정
-		 String currentPage = req.getParameter("currentPage");
-		 String countPerPage = req.getParameter("countPerPage");
-		 String resultType = req.getParameter("resultType");
-		 String confmKey = req.getParameter("confmKey");
-		 String keyword = req.getParameter("keyword");
-		 
-		/*// API 호출 URL 정보 설정
-		 String apiUrl = "http://www.juso.go.kr/addrlink/addrLinkApi.do?currentPage="
-		+currentPage+"&countPerPage="+countPerPage+"&keyword="
-				 +URLEncoder.encode(keyword,"UTF-8")+"&confmKey="+confmKey+"&resultType="+resultType;
-		 URL url = new URL(apiUrl);
-		 BufferedReader br = new BufferedReader(
-				 			 new InputStreamReader(
-				 			 url.openStream(),"UTF-8"));
-		 StringBuffer sb = new StringBuffer();
-		 String tempStr = null;
-		 while(true){
-		 tempStr = br.readLine();
-		 if(tempStr == null) break;
-		 sb.append(tempStr); // 응답결과 JSON 저장
-		 }
-		 br.close();
-		 response.setCharacterEncoding("UTF-8");
-		 response.setContentType("text/xml");
-		 response.getWriter().write(sb.toString()); // 응답결과 반환
-*/		// 검색어api 내용 종료
 		
 		return new ModelAndView("map/map_search");
 	}	

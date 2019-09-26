@@ -75,81 +75,83 @@
 		</div>
 	</div>
 	
+	
+	<script type="text/javascript">
+	function getAddrLoc(){
+		 // 적용예 (api 호출 전에 검색어 체크)
+		if (!checkSearchedWord(document.form.keyword))
+		 {
+		 return ;
+		 }
+
+		 $.ajax({
+		 url :"/sample/getAddrApi.do"
+		 ,type:"post"
+		 ,data:$("#form").serialize()
+		 ,dataType: ”json"
+		 ,success:function(jsonStr){
+		 $("#list").html("");
+		 var errCode =
+		jsonStr.results.common.errorCode;
+		 var errDesc =
+		jsonStr.results.common.errorMessage;
+		 if(errCode!= ＂0＂){
+		 alert(errCode+"="+errDesc);
+		 }else{
+		 if(xmlStr!= null){
+		 makeListJson(jsonStr); //JSON데이터 HTML형태로 변환
+		 }
+		 }
+		 },error: function(xhr,status, error){
+		 alert("에러발생");
+		 }
+		 });
+		}
+		//특수문자, 특정문자열(sql예약어의 앞뒤공백포함)
+		제거
+		function checkSearchedWord(obj){
+		 if(obj.value.length >0){
+		 //특수문자 제거
+		 var expText = /[%=><]/ ;
+		 if(expText.test(obj.value) == true){
+		 alert("특수문자를 입력 할수 없습니다.") ;
+		 obj.value = obj.value.split(expText).join("");
+		 return false;
+		 }
+
+		 //특정문자열(sql예약어의 앞뒤공백포함) 제거
+		 var sqlArray = new Array(
+		 //sql 예약어
+		 "OR", "SELECT", "INSERT", "DELETE", "UPDATE“
+		 ,"CREATE", "DROP", "EXEC", "UNION“
+		 ,"FETCH", "DECLARE", "TRUNCATE" );
+
+		 var regex;
+		 for(var i=0; i<sqlArray.length; i++){
+		 regex = new RegExp( sqlArray[i] ,"gi") ;
+
+		 if (regex.test(obj.value) ) {
+		 alert("\"" + sqlArray[i]+"\"와(과) 같은 특
+		정문자로 검색할 수 없습니다.");
+		 obj.value =obj.value.replace(regex, "");
+		 return false;
+		 }
+		 }
+		 }
+		 return true ;
+		}
+	</script>
+	
+	<form name="form" id="form" method="post">
+ 		<!-- 요청 변수 설정 (검색결과형식 설정, json) -->
+ 		<input type="hidden" name="resultType" value="json"/>
+	</form>
+	
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>
 	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
 
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6a3dd312ac8afc0012c58d3a915c29b&libraries=services,clusterer,drawing"></script>
-	<script>
 	
-		var infowindow = new daum.maps.InfoWindow({zIndex:1});
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = {
-		        center: new daum.maps.LatLng(37.566826, 126.9786567), "C:/Users/OK-home"// 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };  
 	
-		// 지도를 생성합니다    
-		var map = new daum.maps.Map(mapContainer, mapOption);
-		
-		// 장소 검색 객체를 생성합니다
-		var ps = new daum.maps.services.Places(); 
-
-		// 키워드로 장소를 검색합니다
-		ps.keywordSearch('성동구', placesSearchCB); 
-
-		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-		function placesSearchCB (data, status, pagination) {
-		    if (status === daum.maps.services.Status.OK) {
-
-		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-		        // LatLngBounds 객체에 좌표를 추가합니다
-		        var bounds = new daum.maps.LatLngBounds();
-
-		        for (var i=0; i<data.length; i++) {
-		            displayMarker(data[i]);    
-		            bounds.extend(new daum.maps.LatLng(data[i].y, data[i].x));
-		        }       
-
-		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-		        map.setBounds(bounds);
-		    } 
-		}
-
-		// 지도에 마커를 표시하는 함수입니다
-		function displayMarker(place) {
-		    
-		    // 마커를 생성하고 지도에 표시합니다
-		    var marker = new daum.maps.Marker({
-		        map: map,
-		        position: new daum.maps.LatLng(place.y, place.x) 
-		    });
-
-		    // 마커에 클릭이벤트를 등록합니다
-		    daum.maps.event.addListener(marker, 'click', function() {
-		        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-		        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-		        infowindow.open(map, marker);
-		    });
-		}
-		
-		$(function() {
-			$("#area1").change(function(e) {
-				e.preventDefault();
-				var selectedArea1 = $("#area1").val();
-				$.ajax({
-					url: '${pageContext.request.contextPath}/map/map_search.do',
-					method: 'post',
-					data: {selectedArea1:selectedArea1},
-					dataType : 'html',
-					success: function(req) {
-						
-					}
-				});
-				
-			});
-		});
-		
-	</script>
 </body>
 </html>
