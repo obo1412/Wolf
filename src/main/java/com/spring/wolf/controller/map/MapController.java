@@ -1,16 +1,14 @@
 package com.spring.wolf.controller.map;
 
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.util.URLEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ import com.spring.wolf.service.MemberService;
 @Controller
 public class MapController {
 	/** log4j 객체 생성 및 사용할 객체 주입받기 */
-	//private static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
+	Logger logger = LoggerFactory.getLogger(MapController.class);
 	// --> import study.spring.helper.WebHelper;
 	@Autowired
 	WebHelper web;
@@ -103,8 +101,8 @@ public class MapController {
 		 * ajax로 area2에 area1Id를 받아와 셋을 해야한다.
 		 */
 		Area2 area2 = new Area2();
-		int selectedArea1 = web.getInt("selectedArea1");
-		area2.setArea1Id(selectedArea1);
+		int sltArea1 = web.getInt("selectedArea1");
+		area2.setArea1Id(sltArea1);
 		
 		List<Area2> a2list = null;
 		try {
@@ -120,37 +118,6 @@ public class MapController {
 		model.addAttribute("page", page);
 		model.addAttribute("alist", alist);
 		model.addAttribute("a2list", a2list);
-		
-		
-		
-		// 검색어api 내용 시작
-		// 요청변수 설정
-		 String currentPage = req.getParameter("currentPage");
-		 String countPerPage = req.getParameter("countPerPage");
-		 String resultType = req.getParameter("resultType");
-		 String confmKey = req.getParameter("confmKey");
-		 String keyword = req.getParameter("keyword");
-		 
-		/*// API 호출 URL 정보 설정
-		 String apiUrl = "http://www.juso.go.kr/addrlink/addrLinkApi.do?currentPage="
-		+currentPage+"&countPerPage="+countPerPage+"&keyword="
-				 +URLEncoder.encode(keyword,"UTF-8")+"&confmKey="+confmKey+"&resultType="+resultType;
-		 URL url = new URL(apiUrl);
-		 BufferedReader br = new BufferedReader(
-				 			 new InputStreamReader(
-				 			 url.openStream(),"UTF-8"));
-		 StringBuffer sb = new StringBuffer();
-		 String tempStr = null;
-		 while(true){
-		 tempStr = br.readLine();
-		 if(tempStr == null) break;
-		 sb.append(tempStr); // 응답결과 JSON 저장
-		 }
-		 br.close();
-		 response.setCharacterEncoding("UTF-8");
-		 response.setContentType("text/xml");
-		 response.getWriter().write(sb.toString()); // 응답결과 반환
-*/		// 검색어api 내용 종료
 		
 		return new ModelAndView("map/map_search");
 	}	

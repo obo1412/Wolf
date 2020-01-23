@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<%@include file="/WEB-INF/views/inc/topboard.jsp" %>
+	<%@include file="/WEB-INF/views/inc/topbar.jsp" %>
 	<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
 	
 	<div class="con clear">

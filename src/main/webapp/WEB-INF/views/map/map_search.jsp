@@ -43,7 +43,7 @@
 	</style>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/inc/topboard.jsp" %>
+	<%@include file="/WEB-INF/views/inc/topbar.jsp" %>
 	<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
 	
 	<div class="con clear">
@@ -63,12 +63,13 @@
 						<option value="${aitem.id}">${aitem.name}</option>
 					</c:forEach>
 				</select>
-				<select name="town">
+				<select name="town" id="area2">
 					<option value="">시/군/구 선택</option>
 					<c:forEach var="a2item" items="${a2list}" varStatus="i">
 						<option value="${a2item.id}">${a2item.name}</option>
 					</c:forEach>
 				</select>
+				<div id="result"></div>
 				<input type="button" value="지역게시판 입장" onclick="location.href='${pageContext.request.contextPath}/bbs/document_list.do?category=1001000'">
 			</div>
 			
@@ -77,75 +78,23 @@
 	
 	
 	<script type="text/javascript">
-	function getAddrLoc(){
-		 // 적용예 (api 호출 전에 검색어 체크)
-		if (!checkSearchedWord(document.form.keyword))
-		 {
-		 return ;
-		 }
-
-		 $.ajax({
-		 url :"/sample/getAddrApi.do"
-		 ,type:"post"
-		 ,data:$("#form").serialize()
-		 ,dataType: ”json"
-		 ,success:function(jsonStr){
-		 $("#list").html("");
-		 var errCode =
-		jsonStr.results.common.errorCode;
-		 var errDesc =
-		jsonStr.results.common.errorMessage;
-		 if(errCode!= ＂0＂){
-		 alert(errCode+"="+errDesc);
-		 }else{
-		 if(xmlStr!= null){
-		 makeListJson(jsonStr); //JSON데이터 HTML형태로 변환
-		 }
-		 }
-		 },error: function(xhr,status, error){
-		 alert("에러발생");
-		 }
-		 });
-		}
-		//특수문자, 특정문자열(sql예약어의 앞뒤공백포함)
-		제거
-		function checkSearchedWord(obj){
-		 if(obj.value.length >0){
-		 //특수문자 제거
-		 var expText = /[%=><]/ ;
-		 if(expText.test(obj.value) == true){
-		 alert("특수문자를 입력 할수 없습니다.") ;
-		 obj.value = obj.value.split(expText).join("");
-		 return false;
-		 }
-
-		 //특정문자열(sql예약어의 앞뒤공백포함) 제거
-		 var sqlArray = new Array(
-		 //sql 예약어
-		 "OR", "SELECT", "INSERT", "DELETE", "UPDATE“
-		 ,"CREATE", "DROP", "EXEC", "UNION“
-		 ,"FETCH", "DECLARE", "TRUNCATE" );
-
-		 var regex;
-		 for(var i=0; i<sqlArray.length; i++){
-		 regex = new RegExp( sqlArray[i] ,"gi") ;
-
-		 if (regex.test(obj.value) ) {
-		 alert("\"" + sqlArray[i]+"\"와(과) 같은 특
-		정문자로 검색할 수 없습니다.");
-		 obj.value =obj.value.replace(regex, "");
-		 return false;
-		 }
-		 }
-		 }
-		 return true ;
-		}
+		$("#area1").change(function(e) {
+			e.preventDefault();
+			
+			var sltArea1 = $("#area1").find("option:selected").val();
+			
+			$.ajax({
+				url: '${pageContext.request.contextPath}/map/map_search.do',
+				method: 'get',
+				data: { selectedArea1 : sltArea1 },
+				dataType: 'html',
+				success: function(req) {
+					console.log(sltArea1);
+					
+				}
+			});		//end ajax
+		}); //end change
 	</script>
-	
-	<form name="form" id="form" method="post">
- 		<!-- 요청 변수 설정 (검색결과형식 설정, json) -->
- 		<input type="hidden" name="resultType" value="json"/>
-	</form>
 	
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>

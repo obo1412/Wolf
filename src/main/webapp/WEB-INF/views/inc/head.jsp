@@ -4,18 +4,22 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>My JSP Page</title>
+<title>Our Hometown Professional</title>
 <!-- Twitter Bootstrap3 & jQuery -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 	
 <!-- 공통 CSS -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css" />
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/common.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/topboard.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/sidebar.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/selectbar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/selectbar.css" /> --%>
+
+<link href="${pageContext.request.contextPath}/assets/matrix-admin-libs/libs/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/assets/matrix-admin-libs/extra-libs/calendar/calendar.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/assets/css/matrix-admin-css/style.min.css" rel="stylesheet">
 
 <!-- 다음 우편번호 검색 스크립트 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
