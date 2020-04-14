@@ -14,9 +14,6 @@
 		<!-- Sidebar navigation-->
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav" class="p-t-30">
-				<li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="match.jsp" aria-expanded="false">
-					<i class="mdi mdi-receipt"></i><span class="hide-menu">mdb to MySQL 변환</span></a></li>
-					
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
 					href="${pageContext.request.contextPath}/bbs/document_list.do?category=notice" aria-expanded="false"><i

@@ -33,7 +33,7 @@
 								<div class="row">
 									<div class="col-lg-3 border-right p-r-0">
 										<div class="card-body border-bottom">
-											<h4 class="card-title m-t-10">Drag & Drop Event</h4>
+											<h4 class="card-title m-t-10">Drag n Drop Event</h4>
 										</div>
 										<div class="card-body">
 											<div class="row">
