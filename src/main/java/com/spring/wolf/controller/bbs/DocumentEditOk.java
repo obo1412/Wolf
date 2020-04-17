@@ -22,7 +22,7 @@ import com.spring.helper.UploadHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsDocument;
 import com.spring.wolf.model.BbsFile;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsDocumentService;
 import com.spring.wolf.service.BbsFileService;
 
@@ -97,7 +97,7 @@ public class DocumentEditOk {
 		// 소유권 검사 정보
 		boolean myDocument = false;
 		
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			try {
 				// 소유권 판정을 위하여 사용하는 임시 객체

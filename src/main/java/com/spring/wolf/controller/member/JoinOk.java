@@ -22,8 +22,8 @@ import com.spring.helper.FileInfo;
 import com.spring.helper.RegexHelper;
 import com.spring.helper.UploadHelper;
 import com.spring.helper.WebHelper;
-import com.spring.wolf.model.Member;
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.model.Player;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class JoinOk {
@@ -44,7 +44,7 @@ public class JoinOk {
 	UploadHelper upload;
 	// --> import study.jsp.mysite.service.MemberService;
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 
 	@RequestMapping(value = "/member/join_ok.do")
 	public ModelAndView doRun(Locale locale, Model model, HttpServletRequest request,
@@ -189,7 +189,7 @@ public class JoinOk {
 		logger.debug("profileImg=" + profileImg);
 
 		/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
-		Member member = new Member();
+		Player member = new Player();
 		member.setUserId(userId);
 		member.setUserPw(userPwRe);
 		member.setName(name);
@@ -204,7 +204,7 @@ public class JoinOk {
 
 		/** (8) Service를 통한 데이터베이스 저장 처리 */
 		try {
-			memberService.insertMember(member);
+			memberService.insertPlayer(member);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}

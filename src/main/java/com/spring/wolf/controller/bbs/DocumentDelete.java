@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsDocument;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsDocumentService;
 
 @Controller
@@ -60,7 +60,7 @@ public class DocumentDelete {
 		document.setCategory(category);
 		
 		// 로그인 한 경우 현재 회원의 일련번호를 추가한다. (비로그인 시 0으로 설정됨)
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			document.setMemberId(loginInfo.getId());
 		}

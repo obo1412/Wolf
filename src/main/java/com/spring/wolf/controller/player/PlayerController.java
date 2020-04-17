@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.helper.PageHelper;
 import com.spring.helper.WebHelper;
 
-import com.spring.wolf.model.Member;
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.model.Player;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class PlayerController {
@@ -31,7 +31,7 @@ public class PlayerController {
 	PageHelper page;
 	
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 	
 	/** 교수 목록 페이지 */
 	@RequestMapping(value = "/player/player_list.do", method = RequestMethod.GET)
@@ -41,11 +41,11 @@ public class PlayerController {
 		web.init();
 		
 		// 파라미터를 저장할 Beans
-		Member member = new Member();
+		Player player = new Player();
 		
 		// 검색어 파라미터 받기 + Beans 설정
 		String keyword = web.getString("keyword", "");
-		member.setName(keyword);
+		player.setName(keyword);
 		
 		// 현재 페이지 번호에 대한 파라미터 받기
 		int nowPage = web.getInt("page", 1);
@@ -54,21 +54,21 @@ public class PlayerController {
 		// 전체 데이터 수 조회하기
 		int totalCount = 0;
 		try {
-			totalCount = memberService.getPlayerCount(member);
+			totalCount = memberService.getPlayerCount(player);
 		}  catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}
 		
 		// 페이지 번호에 대한 연산 수행 후 조회조건값 지정을 위한 Beans에 추가하기
 		page.pageProcess(nowPage, totalCount, 10, 5);
-		member.setLimitStart(page.getLimitStart());
-		member.setListCount(page.getListCount());
+		player.setLimitStart(page.getLimitStart());
+		player.setListCount(page.getListCount());
 		
 		/** 3) Service를 통한 SQL 수행 */
 		// 조회 결과를 저장하기 위한 객체
-		List<Member> list = null;
+		List<Player> list = null;
 		try {
-			list = memberService.selectMemberList(member);
+			list = memberService.selectPlayerList(player);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}

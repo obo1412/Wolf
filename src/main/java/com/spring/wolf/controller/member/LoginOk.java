@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.helper.UploadHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.controller.Download;
-import com.spring.wolf.model.Member;
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.model.Player;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class LoginOk {
@@ -32,7 +32,7 @@ public class LoginOk {
 	@Autowired
 	UploadHelper upload;
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 
 	@RequestMapping(value = "/member/login_ok.do")
 	public ModelAndView doRun(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -59,12 +59,12 @@ public class LoginOk {
 		}
 
 		/** (5) 전달받은 파라미터를 Beans에 설정한다. */
-		Member member = new Member();
+		Player member = new Player();
 		member.setUserId(userId);
 		member.setUserPw(userPw);
 
 		/** (6) Service를 통한 회원 인증 */
-		Member loginInfo = null;
+		Player loginInfo = null;
 
 		try {
 			// 아이디와 비밀번호가 일치하는 회원 정보를 조회하여 리턴한다.

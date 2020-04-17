@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.helper.WebHelper;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 
 @Controller
 public class Logout {
@@ -28,7 +28,7 @@ public class Logout {
 
 		/** (3) 로그인 여부 검사 */
 		// 로그인중인 회원 정보 가져오기
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 		if (loginInfo == null) {
 			return web.redirect(web.getRootPath() + "/index.do", "로그인 후에 이용 가능합니다.");

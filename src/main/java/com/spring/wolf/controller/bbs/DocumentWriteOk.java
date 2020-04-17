@@ -22,7 +22,7 @@ import com.spring.helper.UploadHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsDocument;
 import com.spring.wolf.model.BbsFile;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsDocumentService;
 import com.spring.wolf.service.BbsFileService;
 
@@ -72,7 +72,7 @@ public class DocumentWriteOk {
 		int memberId = 0;
 
 		// 로그인 한 경우, 입력하지 않은 이름, 비밀번호, 이메일을 세션정보로 대체
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			writerName = loginInfo.getName();
 			email = loginInfo.getEmail();

@@ -1,6 +1,6 @@
 package com.spring.wolf.model;
 
-public class Member {
+public class Player {
 	private int id;
 	private String name;
 	private String userId;

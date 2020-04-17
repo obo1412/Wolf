@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.helper.RegexHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsComment;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsCommentService;
 
 @Controller
@@ -72,7 +72,7 @@ public class CommentEditOk {
 		// 소유권 검사 정보
 		boolean myComment = false;
 		
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			try {
 				// 소유권 판정을 위하여 사용하는 임시 객체

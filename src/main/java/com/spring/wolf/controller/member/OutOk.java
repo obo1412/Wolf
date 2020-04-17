@@ -19,12 +19,12 @@ import com.spring.helper.WebHelper;
 import com.spring.wolf.controller.Download;
 import com.spring.wolf.model.BbsComment;
 import com.spring.wolf.model.BbsDocument;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsCommentService;
 import com.spring.wolf.service.BbsDocumentService;
 /*import com.spring.wolf.service.BbsCommentService;
 import com.spring.wolf.service.BbsDocumentService;*/
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class OutOk {
@@ -38,7 +38,7 @@ public class OutOk {
 	@Autowired
 	UploadHelper upload;
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 	@Autowired
 	BbsDocumentService bbsDocumentService;
 	@Autowired
@@ -65,8 +65,8 @@ public class OutOk {
 
 		/** (5) 서비스에 전달하기 위하여 파라미터를 Beans로 묶는다. */
 		// 회원번호는 세션을 통해서 획득한 로그인 정보에서 취득.
-		Member loginInfo = (Member) web.getSession("loginInfo");
-		Member member = new Member();
+		Player loginInfo = (Player) web.getSession("loginInfo");
+		Player member = new Player();
 		member.setId(loginInfo.getId());
 		member.setUserPw(userPw);
 
@@ -84,9 +84,9 @@ public class OutOk {
 			bbsDocumentService.updateDocumentMemberOut(document);
 			bbsCommentService.updateCommentMemberOut(comment);
 			// 비밀번호 검사 --> 비밀번호가 잘못된 경우 예외발생
-			memberService.selectMemberPasswordCount(member);
+			memberService.selectPlayerPasswordCount(member);
 			// 탈퇴처리
-			memberService.deleteMember(member);
+			memberService.deletePlayer(member);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}

@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="MemberMapper">
-	<resultMap id="member" type="com.spring.wolf.model.Member">
+<mapper namespace="PlayerMapper">
+	<resultMap id="player" type="com.spring.wolf.model.Player">
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="userId" column="user_id"/>
@@ -23,18 +23,18 @@
 	</resultMap>
 	
 	<!-- 아이디 중복검사를 수행한다 -->
-	<select id="selectUserIdCount" parameterType="com.spring.wolf.model.Member" resultType="int">
-		SELECT count(id) FROM member WHERE user_id=#{userId}
+	<select id="selectUserIdCount" parameterType="com.spring.wolf.model.Player" resultType="int">
+		SELECT count(id) FROM player WHERE user_id=#{userId}
 	</select>
 	
 	<!-- 이메일 중복 검사를 수행한다 -->
-	<select id="selectEmailCount" parameterType="com.spring.wolf.model.Member" resultType="int">
-		SELECT count(id) FROM member WHERE email=#{email}
+	<select id="selectEmailCount" parameterType="com.spring.wolf.model.Player" resultType="int">
+		SELECT count(id) FROM player WHERE email=#{email}
 	</select>
 	
 	<!-- 회원정보를 저장한다 : 가입 -->
-	<insert id="insertMember" parameterType="com.spring.wolf.model.Member" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO member (
+	<insert id="insertPlayer" parameterType="com.spring.wolf.model.Player" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO player (
 			name, user_id, user_pw, email, gender, birthdate, tel,
 			postcode, addr1, addr2, profile_img, reg_date, edit_date
 		) VALUES (
@@ -44,37 +44,37 @@
 	</insert>
 	
 	<!-- 아이디와 비밀번호가 일치하는 회원정보를 조회한다. -->
-	<select id="selectLoginInfo" parameterType="com.spring.wolf.model.Member" resultMap="member">
+	<select id="selectLoginInfo" parameterType="com.spring.wolf.model.Player" resultMap="player">
 		SELECT
 			id, name, user_id, user_pw, email, gender,
 			DATE_FORMAT(birthdate, '%Y-%m-%d') AS birthdate,
 			tel, postcode, addr1, addr2, profile_img, reg_date, edit_date
-		FROM member
+		FROM player
 		WHERE user_id=#{userId} AND user_pw=password(#{userPw})
 		ORDER BY id DESC
 		LIMIT 0, 1
 	</select>
 	
 	<!-- 비밀번호 재발급 : 이메일주소가 일치하는 비밀번호를 변경한다. -->
-	<update id="updateMemberPasswordByEmail" parameterType="com.spring.wolf.model.Member">
-		UPDATE member SET user_pw=password(#{userPw}), edit_date=now()
+	<update id="updatePlayerPasswordByEmail" parameterType="com.spring.wolf.model.Player">
+		UPDATE player SET user_pw=password(#{userPw}), edit_date=now()
 		WHERE email=#{email};
 	</update>
 	
 	<!-- 현재 로그인 중인 회원의 비밀번호를 검사한다. -->
-	<select id="selectMemberPasswordCount" parameterType="com.spring.wolf.model.Member" resultType="int">
-		SELECT count(id) FROM member
+	<select id="selectPlayerPasswordCount" parameterType="com.spring.wolf.model.Player" resultType="int">
+		SELECT count(id) FROM player
 		WHERE id=#{id} AND user_pw=password(#{userPw})
 	</select>
 	
 	<!-- 회원정보를 삭제한다 : 탈퇴 -->
-	<delete id="deleteMember" parameterType="com.spring.wolf.model.Member">
-		DELETE FROM member WHERE id=#{id};
+	<delete id="deletePlayer" parameterType="com.spring.wolf.model.Player">
+		DELETE FROM player WHERE id=#{id};
 	</delete>
 	
 	<!-- 회원정보를 변경한다 -->
-	<update id="updateMember" parameterType="com.spring.wolf.model.Member">
-		UPDATE member SET
+	<update id="updatePlayer" parameterType="com.spring.wolf.model.Player">
+		UPDATE player SET
 			name=#{name}, email=#{email}, gender=#{gender}, birthdate=#{birthdate},
 			tel=#{tel}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2},
 			edit_date=now()
@@ -95,31 +95,31 @@
 	</update>
 	
 	<!-- 일련번호에 의한 회원정보 조회 -->
-	<select id="selectMember" parameterType="com.spring.wolf.model.Member" resultMap="member">
+	<select id="selectPlayer" parameterType="com.spring.wolf.model.Player" resultMap="player">
 		SELECT
 			id, name, user_id, user_pw, email, gender,
 			DATE_FORMAT(birthdate, '%Y-%m-%d') AS birthdate,
 			tel, postcode, addr1, addr2, profile_img, reg_date, edit_date
-		FROM member
+		FROM player
 		WHERE id=#{id}
 	</select>
 	
 	<!-- 선수(회원정보)목록 조회 -->
-	<select id="selectPlayerList" parameterType="com.spring.wolf.model.Member" resultMap="member">
+	<select id="selectPlayerList" parameterType="com.spring.wolf.model.Player" resultMap="player">
 		SELECT
 			id, name, user_id, user_pw, email, gender,
 			DATE_FORMAT(birthdate, '%Y-%m-%d') AS birthdate,
 			tel, postcode, addr1, addr2, profile_img, reg_date, edit_date,
 			private_option_key
-		FROM member
+		FROM player
 		ORDER BY id ASC
 	</select>
 	
 	<!-- 선수목록 전체 데이터 수 얻기 -->
 	<select id="selectPlayerCount"
-		parameterType="com.spring.wolf.model.Member"
+		parameterType="com.spring.wolf.model.Player"
 		resultType="int">
 		SElECT count(id)
-		FROM member
+		FROM player
 	</select>
 </mapper>

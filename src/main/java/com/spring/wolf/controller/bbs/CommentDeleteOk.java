@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsComment;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsCommentService;
 
 
@@ -65,7 +65,7 @@ public class CommentDeleteOk {
 		
 		/** (5) 데이터 삭제 처리 */
 		// 로그인 중이라면 회원일련번호를 Beans에 추가한다.
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			comment.setMemberId(loginInfo.getId());
 		}

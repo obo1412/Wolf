@@ -17,10 +17,10 @@ import com.spring.helper.PageHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.Area;
 import com.spring.wolf.model.Area2;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.Area2Service;
 import com.spring.wolf.service.AreaService;
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class DocumentSearch {
@@ -34,7 +34,7 @@ public class DocumentSearch {
 	PageHelper page;
 	
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 	
 	@Autowired
 	AreaService areaService;
@@ -50,7 +50,7 @@ public class DocumentSearch {
 		web.init();
 		
 		// 파라미터를 저장할 Beans
-		Member member = new Member();
+		Player member = new Player();
 		Area area = new Area();
 		
 		
@@ -77,9 +77,9 @@ public class DocumentSearch {
 		
 		/** 3) Service를 통한 SQL 수행 */
 		// 조회 결과를 저장하기 위한 객체
-		List<Member> list = null;
+		List<Player> list = null;
 		try {
-			list = memberService.selectMemberList(member);
+			list = memberService.selectPlayerList(member);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}

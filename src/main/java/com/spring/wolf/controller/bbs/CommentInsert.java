@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.helper.RegexHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsComment;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsCommentService;
 
 @Controller
@@ -60,7 +60,7 @@ public class CommentInsert {
 		int memberId = 0;
 
 		// 로그인 한 경우, 입력하지 않은 이름, 비밀번호, 이메일을 세션정보로 대체
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			writerName = loginInfo.getName();
 			email = loginInfo.getEmail();

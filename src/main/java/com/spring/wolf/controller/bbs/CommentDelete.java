@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.helper.WebHelper;
 import com.spring.wolf.model.BbsComment;
-import com.spring.wolf.model.Member;
+import com.spring.wolf.model.Player;
 import com.spring.wolf.service.BbsCommentService;
 
 
@@ -49,7 +49,7 @@ public class CommentDelete {
 		comment.setId(commentId);
 		
 		// 로그인 한 경우 현재 회원의 일련번호를 추가한다. (비로그인 시 0으로 설정됨)
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		if (loginInfo != null) {
 			comment.setMemberId(loginInfo.getId());
 		}

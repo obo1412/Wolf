@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.helper.MailHelper;
 import com.spring.helper.Util;
 import com.spring.helper.WebHelper;
-import com.spring.wolf.model.Member;
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.model.Player;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class FindPwOk {
@@ -39,7 +39,7 @@ public class FindPwOk {
 	Util util;
 	
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 	
 	@RequestMapping(value = "/member/find_pw_ok.do")
 	public ModelAndView doRun(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -70,13 +70,13 @@ public class FindPwOk {
 		String newPassword = util.getRandomPassword();
 		
 		/** (6) 입력값을 JavaBeans에 저장하기 */
-		Member member = new Member();
+		Player member = new Player();
 		member.setEmail(email);
 		member.setUserPw(newPassword);
 		
 		/** (7) Service를 통한 비밀번호 갱신 */		
 		try {
-			memberService.updateMemberPasswordByEmail(member);
+			memberService.updatePlayerPasswordByEmail(member);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 			

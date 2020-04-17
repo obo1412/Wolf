@@ -35,7 +35,7 @@ public class UploadHelper {
 	public String tempDir = null;
 	
 	public UploadHelper(String homeDir) {
-		this.fileDir = homeDir + "/upload";
+		this.fileDir = homeDir + "/upload/Wolf";
 		this.tempDir = fileDir + "/temp";
 	}
 

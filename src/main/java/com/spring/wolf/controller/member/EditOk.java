@@ -21,8 +21,8 @@ import com.spring.helper.RegexHelper;
 import com.spring.helper.UploadHelper;
 import com.spring.helper.WebHelper;
 import com.spring.wolf.controller.Download;
-import com.spring.wolf.model.Member;
-import com.spring.wolf.service.MemberService;
+import com.spring.wolf.model.Player;
+import com.spring.wolf.service.PlayerService;
 
 @Controller
 public class EditOk {
@@ -39,7 +39,7 @@ public class EditOk {
 	@Autowired
 	UploadHelper upload;
 	@Autowired
-	MemberService memberService;
+	PlayerService memberService;
 	
 	@RequestMapping(value = "/member/edit_ok.do")
 	public ModelAndView doRun(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -47,7 +47,7 @@ public class EditOk {
 		web.init();
 
 		/** (3) 로그인 여부 검사 */
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		Player loginInfo = (Player) web.getSession("loginInfo");
 		// 로그인 중이라면 이 페이지를 동작시켜서는 안된다.
 		if (loginInfo == null) {
 			
@@ -211,7 +211,7 @@ public class EditOk {
 
 		/** (8) 전달받은 파라미터를 Beans 객체에 담는다. */
 		//  아이디는 변경할 수 없으므로 제외한다.
-		Member member = new Member();
+		Player member = new Player();
 		// WHERE절에 사용할 회원번호는 세션에서 취득
 		member.setId(loginInfo.getId());
 		member.setUserPw(userPw);
@@ -241,11 +241,11 @@ public class EditOk {
 
 		/** (9) Service를 통한 데이터베이스 저장 처리 */
 		// 변경된 정보를 저장하기 위한 객체
-		Member editInfo = null;
+		Player editInfo = null;
 		try {
-			memberService.selectMemberPasswordCount(member);
-			memberService.updateMember(member);
-			editInfo = memberService.selectMember(member);
+			memberService.selectPlayerPasswordCount(member);
+			memberService.updatePlayer(member);
+			editInfo = memberService.selectPlayer(member);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 			

@@ -39,9 +39,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    <property name="url" 
-	     value="jdbc:mysql://localhost:3306/wolf_rev2?characterEncoding=UTF8"/>
+	     value="jdbc:mysql://222.236.8.103:3306/wolf?characterEncoding=UTF8"/>
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="p@$$gisugisu" />
 	</bean>
 	
 	<!-- MyBatis SqlSessionFactory 객체 설정 : config.xml의 역할 수행 -->
@@ -61,7 +61,8 @@
 	<!--helper 패키지 객체 주입 -->
 	<bean id="web" class="com.spring.helper.WebHelper" scope="singleton" />
 	<bean id="upload" class="com.spring.helper.UploadHelper" scope="singleton">
-		<constructor-arg value="C:\Users\OK-home\obo1412\work\workspace_wolf\wolf" />
+		<!-- <constructor-arg value="C:\Users\OK-home\obo1412\work\workspace_wolf\wolf" /> -->
+		<constructor-arg value="/var/packages/Tomcat7/target/src/webapps/downloads" />
 	</bean>
 	<bean id="mail" class="com.spring.helper.MailHelper" scope="singleton">
 		<constructor-arg ref="mailSender" />
