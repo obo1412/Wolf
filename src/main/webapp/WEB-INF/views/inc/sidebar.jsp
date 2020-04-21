@@ -20,21 +20,20 @@
 						class="mdi mdi-view-dashboard"></i><span class="hide-menu">공지사항</span></a></li>
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
-					href="charts.html" aria-expanded="false"><i
+					href="${pageContext.request.contextPath}/map/map_search.do" aria-expanded="false"><i
 						class="mdi mdi-chart-bar"></i><span class="hide-menu">경기장 찾기</span></a></li>
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
-					href="widgets.html" aria-expanded="false"><i
+					href="${pageContext.request.contextPath}/player/player_list.do" aria-expanded="false"><i
 						class="mdi mdi-chart-bubble"></i><span class="hide-menu">선수목록</span></a></li>
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
 					href="tables.html" aria-expanded="false"><i
 						class="mdi mdi-border-inside"></i><span class="hide-menu">웃긴 자료</span></a></li>
-				<li class="sidebar-item"><a
+				<%-- <li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
-					href="grid.html" aria-expanded="false"><i
-						class="mdi mdi-blur-linear"></i><span class="hide-menu">Full
-							Width</span></a></li>
+					href="${pageContext.request.contextPath}/field/insert_field.do" aria-expanded="false"><i
+						class="mdi mdi-blur-linear"></i><span class="hide-menu">운동장정보 일괄등록</span></a></li> --%>
 
 				<li class="sidebar-item"><a
 					class="sidebar-link has-arrow waves-effect waves-dark"

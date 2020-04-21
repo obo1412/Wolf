@@ -109,8 +109,7 @@
 		SELECT
 			id, name, user_id, user_pw, email, gender,
 			DATE_FORMAT(birthdate, '%Y-%m-%d') AS birthdate,
-			tel, postcode, addr1, addr2, profile_img, reg_date, edit_date,
-			private_option_key
+			tel, postcode, addr1, addr2, profile_img, reg_date, edit_date
 		FROM player
 		ORDER BY id ASC
 	</select>

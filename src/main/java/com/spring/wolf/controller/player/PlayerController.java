@@ -31,7 +31,7 @@ public class PlayerController {
 	PageHelper page;
 	
 	@Autowired
-	PlayerService memberService;
+	PlayerService playerService;
 	
 	/** 교수 목록 페이지 */
 	@RequestMapping(value = "/player/player_list.do", method = RequestMethod.GET)
@@ -43,14 +43,14 @@ public class PlayerController {
 		// 파라미터를 저장할 Beans
 		Player player = new Player();
 		
-		// 검색어 파라미터 받기 + Beans 설정
+		/*// 검색어 파라미터 받기 + Beans 설정
 		String keyword = web.getString("keyword", "");
 		player.setName(keyword);
 		
 		// 현재 페이지 번호에 대한 파라미터 받기
 		int nowPage = web.getInt("page", 1);
 		
-		/** 2) 페이지 번호 구현하기 */
+		*//** 2) 페이지 번호 구현하기 *//*
 		// 전체 데이터 수 조회하기
 		int totalCount = 0;
 		try {
@@ -62,22 +62,23 @@ public class PlayerController {
 		// 페이지 번호에 대한 연산 수행 후 조회조건값 지정을 위한 Beans에 추가하기
 		page.pageProcess(nowPage, totalCount, 10, 5);
 		player.setLimitStart(page.getLimitStart());
-		player.setListCount(page.getListCount());
+		player.setListCount(page.getListCount());*/
 		
 		/** 3) Service를 통한 SQL 수행 */
 		// 조회 결과를 저장하기 위한 객체
 		List<Player> list = null;
 		try {
-			list = memberService.selectPlayerList(player);
+			list = playerService.selectPlayerList(player);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}
 		
+		
 		/** 4) View 처리하기 */
 		// 조회 결과를 View에게 전달한다.
 		model.addAttribute("list", list);
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("page", page);
+		/*model.addAttribute("keyword", keyword);
+		model.addAttribute("page", page);*/
 		
 		return new ModelAndView("player/player_list");
 	}	
