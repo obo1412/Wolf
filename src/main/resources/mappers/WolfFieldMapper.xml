@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WolfFieldMapper">
+	<resultMap id="wolfField" type="com.spring.wolf.model.WolfField">
+		<result property="idField" column="id_field"/>
+		<result property="nameField" column="name_field"/>
+		<result property="classField" column="class_field"/>
+		<result property="addrField" column="addr_field"/>
+		<result property="xcodeField" column="xcode_field"/>
+		<result property="ycodeField" column="ycdoe_field"/>
+		<result property="telField" column="tel_field"/>
+		<result property="remarksField" column="remarks_field"/>
+		<result property="siteUrlField" column="site_url_field"/>
+		<result property="lectureField" column="lecture_field"/>
+		<result property="inOutField" column="in_out_field"/>
+		<result property="parkingField" column="parking_field"/>
+	</resultMap>
+	
+	<!-- 아이디 중복검사를 수행한다 -->
+	<select id="selectFieldList" parameterType="com.spring.wolf.model.WolfField" resultMap="wolfField">
+		SELECT
+			id_field, name_field
+		FROM field
+	</select>
+	
+	<!-- 운동장 & 체육관 정보 데이터베이스에 저장 -->
+	<insert id="insertField" parameterType="com.spring.wolf.model.WolfField" useGeneratedKeys="true" keyProperty="id_field">
+		INSERT INTO wolf_field (
+			name_field, class_field, addr_field, xcode_field, ycode_field,
+			tel_field, remarks_field, site_url_field, lecture_field,
+			in_out_field, parking_field
+		) VALUES (
+			#{nameField}, #{classField}, #{addrField}, #{xcodeField}, #{ycodeField},
+			#{telField}, #{remarksField}, #{siteUrlField}, #{lectureField},
+			#{inOutField}, #{parkingField}
+		)
+	</insert>
+	
+</mapper>

@@ -43,64 +43,36 @@
 	</style>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/inc/topbar.jsp" %>
-	<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
-	
-	<div class="con clear">
-		<div class="content-box">
-			<%@include file="/WEB-INF/views/inc/selectbar.jsp" %>
-				
-			<div class="content" style="height:400px; float:left;">
-				<div id="map" style="float: left; margin: auto; width:450px; height: 350px; float:left; border:1px solid black;">
-				
+	<div id="main-wrapper">
+		<%@include file="/WEB-INF/views/inc/topbar.jsp" %>
+		<%-- <%@include file="/WEB-INF/views/inc/selectbar.jsp" %> --%>
+		<%@include file="/WEB-INF/views/inc/sidebar.jsp" %>
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="content" style="height:400px; float:left;">
+					<div id="map" style="float: left; margin: auto; width:450px; height: 350px; float:left; border:1px solid black;">
+					
+					</div>
 				</div>
 			</div>
-			
-			<div>
-				<select name="city" id="area1">
-					<option value="">시/도 선택</option>
-					<c:forEach var="aitem" items="${alist}" varStatus="i">
-						<option value="${aitem.id}">${aitem.name}</option>
-					</c:forEach>
-				</select>
-				<select name="town" id="area2">
-					<option value="">시/군/구 선택</option>
-					<c:forEach var="a2item" items="${a2list}" varStatus="i">
-						<option value="${a2item.id}">${a2item.name}</option>
-					</c:forEach>
-				</select>
-				<div id="result"></div>
-				<input type="button" value="지역게시판 입장" onclick="location.href='${pageContext.request.contextPath}/bbs/document_list.do?category=1001000'">
-			</div>
-			
+		<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 		</div>
+		<!-- page-wrapper 끝 -->
 	</div>
-	
-	
-	<script type="text/javascript">
-		$("#area1").change(function(e) {
-			e.preventDefault();
-			
-			var sltArea1 = $("#area1").find("option:selected").val();
-			
-			$.ajax({
-				url: '${pageContext.request.contextPath}/map/map_search.do',
-				method: 'get',
-				data: { selectedArea1 : sltArea1 },
-				dataType: 'html',
-				success: function(req) {
-					console.log(sltArea1);
-					
-				}
-			});		//end ajax
-		}); //end change
-	</script>
-	
-	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
-	<%@ include file="/WEB-INF/views/inc/bottombar.jsp" %>
+	<!-- wrapper 끝 -->
+	<%-- <%@ include file="/WEB-INF/views/inc/bottombar.jsp" %> --%>
 	<%@ include file="/WEB-INF/views/inc/script-common.jsp" %>
-
 	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6a3dd312ac8afc0012c58d3a915c29b"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
 	
 </body>
 </html>
