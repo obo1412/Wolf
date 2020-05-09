@@ -216,6 +216,7 @@ public class PlayerServiceImpl implements PlayerService {
 		} catch (NullPointerException e) {
 			throw new Exception("조회된 데이터가 없습니다.");
 		} catch (Exception e) {
+			logger.info(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		

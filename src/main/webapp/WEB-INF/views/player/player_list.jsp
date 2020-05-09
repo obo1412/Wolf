@@ -29,7 +29,7 @@
 							<button class="btn btn-success" type="submit">
 								<i class='fas fa-search'></i>
 							</button>
-							<a href="${pageContext.request.contextPath}/professor/prof_add.do" class="btn btn-primary">선수추가</a>
+							<a href="${pageContext.request.contextPath}/player/player_add.do" class="btn btn-primary">선수추가</a>
 						</span>
 					</div>
 				</form>

@@ -4,8 +4,8 @@ package com.spring.wolf.controller.player;
 import java.util.List;
 import java.util.Locale;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ import com.spring.wolf.service.PlayerService;
 @Controller
 public class PlayerController {
 	/** log4j 객체 생성 및 사용할 객체 주입받기 */
-	//private static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
 	// --> import study.spring.helper.WebHelper;
 	@Autowired
 	WebHelper web;
@@ -69,6 +69,8 @@ public class PlayerController {
 		List<Player> list = null;
 		try {
 			list = playerService.selectPlayerList(player);
+			int cnt = playerService.getPlayerCount(player);
+			logger.info("player count : " + cnt);
 		} catch (Exception e) {
 			return web.redirect(null, e.getLocalizedMessage());
 		}
