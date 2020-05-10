@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.wolf.model.Player;
 import com.spring.wolf.model.WolfField;
 import com.spring.wolf.service.WolfFieldService;
 
@@ -47,4 +48,22 @@ public class WolfFieldServiceImpl implements WolfFieldService {
 				}
 	}
 
+	@Override
+	public List<WolfField> selectFieldList(WolfField field) throws Exception {
+		List<WolfField> result = null;
+		
+		try {
+			result = sqlSession.selectList("WolfFieldMapper.selectFieldList", field);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			logger.info(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
 }

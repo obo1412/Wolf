@@ -14,5 +14,12 @@ public interface WolfFieldService {
 	 */
 	public void insertField(WolfField field) throws Exception;
 	
+	/**
+	 * 경기장 목록 조회
+	 * @param WolfField
+	 * @return 경기장 목록
+	 * @throws Exception
+	 */	
+	public List<WolfField> selectFieldList(WolfField field) throws Exception;
 	
 }

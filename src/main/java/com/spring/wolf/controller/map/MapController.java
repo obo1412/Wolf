@@ -23,9 +23,12 @@ import com.spring.helper.WebHelper;
 import com.spring.wolf.model.Area;
 import com.spring.wolf.model.Area2;
 import com.spring.wolf.model.Player;
+import com.spring.wolf.model.WolfField;
 import com.spring.wolf.service.Area2Service;
 import com.spring.wolf.service.AreaService;
 import com.spring.wolf.service.PlayerService;
+import com.spring.wolf.service.WolfFieldService;
+
 
 @Controller
 public class MapController {
@@ -47,6 +50,9 @@ public class MapController {
 	@Autowired
 	Area2Service area2Service;
 	
+	@Autowired
+	WolfFieldService fieldService;
+	
 	/** 지도 정보 페이지 */
 	@RequestMapping(value = "/map/map_search.do", method = RequestMethod.GET)
 	public ModelAndView doRun(Locale locale, Model model,
@@ -58,7 +64,7 @@ public class MapController {
 		// 파라미터를 저장할 Beans
 		Player player = new Player();
 		Area area = new Area();
-		
+		WolfField field = new WolfField();
 		
 		// 검색어 파라미터 받기 + Beans 설정
 		String keyword2 = web.getString("keyword", "");
@@ -90,6 +96,14 @@ public class MapController {
 			return web.redirect(null, e.getLocalizedMessage());
 		}
 		
+		List<WolfField> list2 = null;
+		try {
+			list2 = fieldService.selectFieldList(field);
+			logger.info("field count : " + list2.size());
+		} catch (Exception e) {
+			return web.redirect(null, e.getLocalizedMessage());
+		}
+		
 		/*List<Area> alist = null;
 		try {
 			alist = areaService.selectAreaList(area);
@@ -113,11 +127,14 @@ public class MapController {
 		*/
 		/** 4) View 처리하기 */
 		// 조회 결과를 View에게 전달한다.
-		model.addAttribute("list", list);
+		model.addAttribute("list", list2);
 		model.addAttribute("keyword2", keyword2);
 		model.addAttribute("page", page);
 		/*model.addAttribute("alist", alist);
 		model.addAttribute("a2list", a2list);*/
+		
+		
+		
 		
 		return new ModelAndView("map/map_search");
 	}	
