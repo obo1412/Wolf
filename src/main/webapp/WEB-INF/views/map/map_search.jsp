@@ -51,49 +51,46 @@
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<div class="content" style="height:400px; float:left;">
-					<div id="map" style="float: left; margin: auto; width:450px; height: 350px; float:left; border:1px solid black;">
+					<div id="map" style="float: left; margin: auto; width:1200px; height: 400px; float:left; border:1px solid black;">
 					
 					</div>
 				</div>
-			</div>
-			
-	<!-- 조회결과를 출력하기 위한 표 -->
-	<table class="table" id="field-List">
-			<thead>
-				<tr>
-					<th class="info text-center">이름</th>
-					<th class="info text-center">종류</th>
-					<th class="info text-center">주소</th>
-					<th class="info text-center">경도</th>
-					<th class="info text-center">위도</th>
-					<th class="info text-center">사이트주소</th>
-				</tr>
-			</thead>
-			<tbody>
-		    	<c:choose>
-		    		<c:when test="${fn:length(list) > 0}">
-		    			<c:forEach var="item" items="${list}">
-		    				<tr>
-					            <td class="text-center">${item.nameField}</td>
-					            <td class="text-center">${item.classField}</td>
-					            <td class="text-center">${item.addrField}</td>
-					            <td class="text-center">${item.xcodeField}</td>
-					            <td class="text-center">${item.ycodeField}</td>
-					            <td class="text-center">${item.siteUrlField}</td>
-				        	</tr>
-		    			</c:forEach>
-		    		</c:when>
-		    		<c:otherwise>
-		    			<tr>
-				            <td colspan="8" class="text-center" style="line-height: 100px;">
-				                조회된 데이터가 없습니다.</td>
-				        </tr>
-		    		</c:otherwise>
-		    	</c:choose>
-			</tbody>
-		</table>			
-			
-			
+				<!-- 조회결과를 출력하기 위한 표 -->
+				<table class="table" id="field-List">
+						<thead>
+							<tr>
+								<th class="info text-center">이름</th>
+								<th class="info text-center">종류</th>
+								<th class="info text-center">주소</th>
+								<th class="info text-center">위도</th>
+								<th class="info text-center">경도</th>
+								<th class="info text-center">사이트주소</th>
+							</tr>
+						</thead>
+						<tbody>
+					    	<c:choose>
+					    		<c:when test="${fn:length(list) > 0}">
+					    			<c:forEach var="item" items="${list}">
+					    				<tr>
+								            <td class="text-center">${item.nameField}</td>
+								            <td class="text-center">${item.classField}</td>
+								            <td class="text-center">${item.addrField}</td>
+								            <td class="text-center">${item.ycodeField}</td>
+								            <td class="text-center">${item.xcodeField}</td>								            
+								            <td class="text-center">${item.siteUrlField}</td>
+							        	</tr>
+					    			</c:forEach>
+					    		</c:when>
+					    		<c:otherwise>
+					    			<tr>
+							            <td colspan="8" class="text-center" style="line-height: 100px;">
+							                조회된 데이터가 없습니다.</td>
+							        </tr>
+					    		</c:otherwise>
+					    	</c:choose>
+						</tbody>
+					</table>	
+			</div>			
 		<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 		</div>
 		<!-- page-wrapper 끝 -->
@@ -121,7 +118,7 @@
 			// 값 확인
 			//alert(xCode + ' ' + yCode);
 			
-			setCenter(yCode, xCode);
+			setCenter(xCode, yCode);
 		});
 		
 		function setCenter(latitude, longitude) {            
