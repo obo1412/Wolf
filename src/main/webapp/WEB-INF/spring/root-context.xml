@@ -39,7 +39,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    <property name="url" 
-	     value="jdbc:mysql://222.236.8.103:3306/wolf?characterEncoding=UTF8"/>
+	     value="jdbc:mysql://222.236.8.103:3306/wolf?characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull"/>
 		<property name="username" value="root" />
 		<property name="password" value="p@$$gisugisu" />
 	</bean>
