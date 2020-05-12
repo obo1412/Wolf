@@ -106,7 +106,7 @@
 				<li class="sidebar-item"><a
 					class="sidebar-link has-arrow waves-effect waves-dark"
 					href="javascript:void(0)" aria-expanded="false"><i
-						class="mdi mdi-alert"></i><span class="hide-menu">Errors </span></a>
+						class="mdi mdi-alert"></i><span class="hide-menu">Errors </span></a>						
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item"><a href="error-403.html"
 							class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span
@@ -121,6 +121,12 @@
 							class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span
 								class="hide-menu"> Error 500 </span></a></li>
 					</ul></li>
+					
+				<li class="sidebar-item"><a
+					class="sidebar-link waves-effect waves-dark sidebar-link"
+					href="${pageContext.request.contextPath}/bulpan/bulpan_home.do" aria-expanded="false"><i
+						class="mdi mdi-relative-scale"></i><span class="hide-menu">불판</span></a></li>
+											
 			</ul>
 		</nav>
 		<!-- End Sidebar navigation -->
